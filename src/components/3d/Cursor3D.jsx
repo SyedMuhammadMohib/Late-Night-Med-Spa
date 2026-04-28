@@ -11,6 +11,11 @@ export default function Cursor3D() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Hide custom cursor on mobile/touch devices
+  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+    return null;
+  }
+
   return (
     <div style={{
       position: 'fixed',

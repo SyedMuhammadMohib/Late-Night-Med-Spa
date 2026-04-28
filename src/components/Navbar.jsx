@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Instagram } from 'lucide-react';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -46,7 +46,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden-mobile" style={{ display: 'flex', gap: '3rem', alignItems: 'center' }}>
+        <div className="hidden-mobile" style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
           {['services', 'specials', 'reviews', 'contact'].map((id) => (
             <a 
               key={id}
@@ -63,6 +63,11 @@ export default function Navbar() {
               {id}
             </a>
           ))}
+          
+          <a href="https://www.instagram.com/latenightmedspachicago" target="_blank" rel="noreferrer" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s', display: 'flex', alignItems: 'center' }} onMouseEnter={(e) => e.target.style.color = 'var(--text-accent)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>
+            <Instagram size={20} />
+          </a>
+
           <a href="https://booking.mangomint.com/latenightmedspachicago" target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.8rem 1.5rem', fontSize: '0.8rem' }}>
             Book Now
           </a>
@@ -111,7 +116,11 @@ export default function Navbar() {
                   {id === 'experience' ? 'Experience' : id === 'specials' ? 'Monthly Specials' : id}
                 </a>
               ))}
-              <a href="https://booking.mangomint.com/latenightmedspachicago" target="_blank" rel="noreferrer" className="btn-primary" style={{ marginTop: '2rem', width: '100%', justifyContent: 'center' }}>
+              <a href="https://www.instagram.com/latenightmedspachicago" target="_blank" rel="noreferrer" style={{ color: 'var(--text-primary)', marginTop: '1rem' }}>
+                <Instagram size={32} />
+              </a>
+              
+              <a href="https://booking.mangomint.com/latenightmedspachicago" target="_blank" rel="noreferrer" className="btn-primary" style={{ marginTop: '1rem', width: '100%', justifyContent: 'center' }}>
                 Book Online Now
               </a>
             </div>
