@@ -163,7 +163,7 @@ const Chatbot = () => {
               }}
               onClick={toggleChat}
             >
-              Is there any way I can help you?
+              How may I help you?
             </motion.div>
             <motion.button
               initial={{ scale: 0, opacity: 0 }}
