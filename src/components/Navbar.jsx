@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import MagneticWrapper from './MagneticWrapper';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -38,12 +40,12 @@ export default function Navbar() {
           borderBottom: isScrolled ? '1px solid rgba(255,255,255,0.05)' : '1px solid transparent'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '1rem', textDecoration: 'none' }}>
           <img src="/favicon.png" alt="LNMS Logo" style={{ width: '45px', height: 'auto', objectFit: 'contain' }} />
           <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--text-primary)', letterSpacing: '0.05em' }}>
             LATE NIGHT <span style={{ color: 'var(--text-accent)', fontStyle: 'italic' }}>MED SPA</span>
           </div>
-        </div>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden-mobile" style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
@@ -72,9 +74,11 @@ export default function Navbar() {
             </svg>
           </a>
 
-          <a href="https://booking.mangomint.com/latenightmedspachicago" target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.8rem 1.5rem', fontSize: '0.8rem' }}>
-            Book Now
-          </a>
+          <MagneticWrapper>
+            <a href="https://booking.mangomint.com/latenightmedspachicago" target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.8rem 1.5rem', fontSize: '0.8rem' }}>
+              Book Now
+            </a>
+          </MagneticWrapper>
         </div>
 
         {/* Mobile Hamburger */}
