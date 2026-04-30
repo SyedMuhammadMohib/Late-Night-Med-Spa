@@ -1,15 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { servicesData } from '../data/servicesData';
 
 export default function Preloader() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Dismiss preloader when page is fully loaded, with a minimum display time of 1s
-    // and a maximum fallback time of 5s.
-    const startTime = Date.now();
-    let isLoaded = document.readyState === 'complete';
+    // Collect all heavy images to preload
+    const imagesToPreload = [
+      ...servicesData.map(s => s.image),
+      "/assets/lgbtq.jpg",
+      "/assets/38+services.jpg",
+      "/assets/ultimateConvenience.jpg",
+      "/assets/Award Winning.jpg"
+    ].filter(Boolean);
+
+    const preloadImages = () => {
+      const promises = imagesToPreload.map(src => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = resolve;
+          img.onerror = resolve; // Resolve anyway to avoid blocking forever on a bad image
+        });
+      });
+      return Promise.all(promises);
+    };
+
     let minTimeElapsed = false;
+    let assetsLoaded = false;
     let minTimer;
 
     const hideLoader = () => {
@@ -17,7 +36,7 @@ export default function Preloader() {
     };
 
     const checkAndHide = () => {
-      if (isLoaded && minTimeElapsed) {
+      if (assetsLoaded && minTimeElapsed) {
         hideLoader();
       }
     };
@@ -27,19 +46,21 @@ export default function Preloader() {
       checkAndHide();
     }, 1500); // Wait at least 1.5s for the cinematic effect
 
-    const handleLoad = () => {
-      isLoaded = true;
+    // Wait for window.onload AND our explicit image preloads
+    const handleLoad = async () => {
+      await preloadImages();
+      assetsLoaded = true;
       checkAndHide();
     };
 
-    if (!isLoaded) {
-      window.addEventListener('load', handleLoad);
+    if (document.readyState === 'complete') {
+      handleLoad();
     } else {
-      checkAndHide();
+      window.addEventListener('load', handleLoad);
     }
 
-    // Fallback in case load event takes too long or already fired
-    const fallbackTimer = setTimeout(hideLoader, 5000);
+    // Fallback in case load event takes too long
+    const fallbackTimer = setTimeout(hideLoader, 8000);
 
     return () => {
       clearTimeout(minTimer);
