@@ -11,7 +11,7 @@ const ServiceCard = ({ service, index }) => {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: (index % 3) * 0.15, ease: "easeOut" }}
+          transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
           whileHover={{ y: -5, transition: { duration: 0.3 } }}
           className="gpu-accelerated glass-panel h-100"
           style={{

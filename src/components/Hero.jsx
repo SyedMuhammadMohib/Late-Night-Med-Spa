@@ -32,8 +32,6 @@ export default function Hero() {
         easing: 'easeInOutSine'
       });
     }
-
-
   }, []);
 
   return (
@@ -61,23 +59,19 @@ export default function Hero() {
           zIndex: 0
         }}
       >
-        <div 
-          style={{ width: '100%', height: '100%' }}
-          dangerouslySetInnerHTML={{
-            __html: `
-              <video 
-                autoplay 
-                loop 
-                muted 
-                playsinline 
-                webkit-playsinline="true"
-                style="width: 100%; height: 100%; object-fit: cover;"
-              >
-                <source src="/assets/MedSpa.mp4" type="video/mp4" />
-              </video>
-            `
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
           }}
-        />
+        >
+          <source src="/assets/MedSpa.mp4" type="video/mp4" />
+        </video>
         {/* Dark overlay for contrast */}
         <div style={{
           position: 'absolute',
