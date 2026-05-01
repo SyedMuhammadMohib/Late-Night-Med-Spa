@@ -6,6 +6,7 @@ import MagneticWrapper from './MagneticWrapper';
 export default function Hero() {
   const ref = useRef(null);
   const btnRef = useRef(null);
+  const videoRef = useRef(null);
   
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -30,6 +31,15 @@ export default function Hero() {
         duration: 3000,
         loop: true,
         easing: 'easeInOutSine'
+      });
+    }
+
+    // Force video playback on mobile devices
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(error => {
+        console.log("Video autoplay failed:", error);
       });
     }
   }, []);
@@ -60,6 +70,7 @@ export default function Hero() {
         }}
       >
         <video 
+          ref={videoRef}
           autoPlay 
           loop 
           muted 
